@@ -1,23 +1,26 @@
 import React, { useEffect, useState } from 'react';
 
-import Board from './components/Board';
+import Boards from 'components/Boards';
+import Board from 'components/Board';
+
 import data from './data/sampleData';
 
 const App = () => {
-  const initialState = data;
-  const [state, setState] = useState(initialState);
+  const initialState = data.boards;
+  const [boards, setState] = useState(initialState);
 
-  useEffect(() => {
-    console.log(`NODE_PATH: ${process.env.REACT_APP_NODE_PATH}`);
-    console.log(`NODE_ENV: ${process.env.NODE_ENV}`);
-  }, []);
-
-  const { boards } = state;
+  const addBoard = (board) => {
+    setState([...boards, board]);
+  };
 
   return (
-    <div className='App'>
-      <h1>Boards</h1>
-      {boards && boards.map((board) => <Board key={board.id} {...board} />)}
+    <div className='app'>
+      <h1 className='title'>Boards</h1>
+      <Boards {...{ boards, addBoard }} />
+      <div>
+        <h2>Sample Board</h2>
+        <Board {...boards[0]} />
+      </div>
     </div>
   );
 };
