@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 
 import List from 'components/List';
@@ -9,14 +9,17 @@ const Board = ({ id, title, background }) => {
   const initialState = data.lists;
   const [lists, setLists] = useState(initialState);
 
-  useEffect(() => {
-    // console.table(lists);
-  }, [lists]);
+  const titleInput = useRef();
 
-  const addList = () => {
+  // useEffect(() => {
+  //   // console.table(lists);
+  // }, [lists]);
+
+  const addList = (e) => {
+    e.preventDefault();
     const list = {
       id: lists[lists.length - 1].id + 100,
-      title: 'New List',
+      title: titleInput.current.value,
       board: id,
       cards: [],
     };
@@ -29,11 +32,18 @@ const Board = ({ id, title, background }) => {
         <small>{id}</small>
       </p>
       <h1>{title}</h1>
-      <div className='form'>
-        <button className='btn' onClick={addList}>
-          Add New List
-        </button>
-      </div>
+      <form className='form form-inline' onSubmit={addList}>
+        <div className='form-group'>
+          <label htmlFor=''>New List</label>
+          <input
+            className='form-control'
+            type='text'
+            name='title'
+            id='title'
+            ref={titleInput}
+          />
+        </div>
+      </form>
       <div className='lists'>
         {lists && lists.map((list) => <List key={list.id} {...list} />)}
       </div>

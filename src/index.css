@@ -142,6 +142,9 @@ button {
   background-color: rgba(127, 127, 127, 0.5);
   padding: 1rem 0;
   display: flex;
+  overflow-x: auto;
+  overflow-y: hidden;
+  white-space: nowrap;
 }
 
 .list {
