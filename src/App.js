@@ -1,26 +1,25 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect, useState } from 'react';
 
-function App() {
+import Board from './components/Board';
+import data from './data/sampleData';
+
+const App = () => {
+  const initialState = data;
+  const [state, setState] = useState(initialState);
+
+  useEffect(() => {
+    console.log(`NODE_PATH: ${process.env.REACT_APP_NODE_PATH}`);
+    console.log(`NODE_ENV: ${process.env.NODE_ENV}`);
+  }, []);
+
+  const { boards } = state;
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className='App'>
+      <h1>Boards</h1>
+      {boards && boards.map((board) => <Board key={board.id} {...board} />)}
     </div>
   );
-}
+};
 
 export default App;
