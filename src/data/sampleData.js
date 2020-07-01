@@ -38,11 +38,11 @@ const lists = [
     board: 1000,
     cards: [
       {
-        id: 11,
+        id: 1,
         text: 'card 11',
       },
       {
-        id: 22,
+        id: 2,
         text: 'card 22',
       },
     ],
@@ -53,11 +53,11 @@ const lists = [
     board: 2000,
     cards: [
       {
-        id: 11,
+        id: 1,
         text: 'card 11',
       },
       {
-        id: 22,
+        id: 2,
         text: 'card 22',
       },
     ],

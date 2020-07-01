@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useRef } from 'react';
 import PropTypes from 'prop-types';
 
 import List from 'components/List';
@@ -9,7 +9,7 @@ const Board = ({ id, title, background }) => {
   const initialState = data.lists;
   const [lists, setLists] = useState(initialState);
 
-  const titleInput = useRef();
+  const titleRef = useRef();
 
   // useEffect(() => {
   //   // console.table(lists);
@@ -17,13 +17,17 @@ const Board = ({ id, title, background }) => {
 
   const addList = (e) => {
     e.preventDefault();
-    const list = {
-      id: lists[lists.length - 1].id + 100,
-      title: titleInput.current.value,
-      board: id,
-      cards: [],
-    };
-    setLists([...lists, list]);
+    const title = titleRef.current.value.trim();
+    if (title) {
+      const list = {
+        id: lists[lists.length - 1].id + 100,
+        title: titleRef.current.value,
+        board: id,
+        cards: [],
+      };
+      setLists([...lists, list]);
+      titleRef.current.value = '';
+    }
   };
 
   return (
@@ -40,7 +44,7 @@ const Board = ({ id, title, background }) => {
             type='text'
             name='title'
             id='title'
-            ref={titleInput}
+            ref={titleRef}
           />
         </div>
       </form>
