@@ -1,12 +1,20 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { CssBaseline, createMuiTheme, ThemeProvider } from '@material-ui/core';
+import 'fontsource-roboto';
 import './index.css';
+
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 
+const theme = createMuiTheme();
+
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+      <App />
+    </ThemeProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );
